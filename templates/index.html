@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Jogos - Dia de Sorte</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Gerador de Jogos - Dia de Sorte</h1>
+            <p>Quadras, Triplas e Duplas</p>
+        </header>
+
+
+    <div class="instrucaoes">
+      <h2>Instruções de uso:</h2>
+      <ol>
+          <li>Sempre aparece nos sorteios  <span class="type">Quadra</span><span class="type">, Duplas</span> ou<span class="type"> Trincas</span>.</li>
+          <li>As dezenas que faltarem para a geração de um jogo será aleatória entre 1 e 31.</li>
+          <li>Selecione a quantidade de Quadra, Duplas ou Trincas desejada.</li>
+          <li>Ao clicar em gerar, será gerado jogos com 7 dezenas.</li>
+          <li>Faça o download do(s) jogo(s) (opcional).</li>
+      </ol>
+      <li>EXEMPLO:</li>
+        <p><span class="group1">01-11</span>, <span class="group2">04-14</span>, <span class="group3">07-17</span></p>
+        <p><span class="group1">02-12</span>, <span class="group2">05-15</span>, <span class="group3">08-28</span></p>
+        <p><span class="group1">03-13</span>, <span class="group2">06-16</span>, <span class="group3">09-19</span></p>
+        <p><span class="group1">4, 14, 24</span>, <span class="group2">5, 15, 25</span>, <span class="group3">6, 16, 26</span></p>
+  </div><br />
+
+
+
+
+
+
+
+        <main>
+            <section class="gerador-form">
+                <div class="input-group">
+                    <label for="quantidade">Quantidade de Jogos: <small>Use somente se quiser vários jogos iguais.</small></label>
+                    <input type="number" id="quantidade" min="1" value="1">
+                </div>
+
+                <div class="grupos-container">
+                    <h2>Selecione os Grupos</h2>
+                    <div class="grupos-grid">
+                        {% for i in range(1, 11) %}
+                        <div class="grupo-card" data-grupo="{{ i }}">
+                            <h3>Grupo {{ i }}</h3>
+                            {% if i == 1 %}
+                            <div class="tipo-select">
+                                <input type="checkbox" id="quadra-{{ i }}" value="quadra">
+                                <label for="quadra-{{ i }}">Quadra</label>
+                            </div>
+                            {% else %}
+                            <div class="tipo-select">
+                                <input type="checkbox" id="trinca-{{ i }}" value="trinca">
+                                <label for="trinca-{{ i }}">Trinca</label>
+                                <input type="checkbox" id="dupla-{{ i }}" value="dupla">
+                                <label for="dupla-{{ i }}">Dupla</label>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <button id="gerar" class="btn-primary">Gerar Jogos</button>
+                    <button id="limpar" class="btn-secondary">Limpar Seleção</button>
+                </div>
+            </section>
+
+            <section class="resultados" style="display: none;">
+                <h2>Jogos Gerados</h2>
+                <div class="jogos-lista"></div>
+                
+                <div class="download-options">
+                    <h3>Download</h3>
+                    <div class="buttons">
+                        <button class="btn-download" data-formato="txt">TXT</button>
+                        <!--<button class="btn-download" data-formato="xlsx">XLSX</button>
+                        <button class="btn-download" data-formato="html">HTML</button>-->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

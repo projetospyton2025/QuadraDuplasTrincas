@@ -1,0 +1,21 @@
+﻿# Ambiente virtual
+venv/
+__pycache__/
+*.pyc
+.env
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos de saÃ­da
+*.xlsx
+*.txt
+!requirements.txt
+
+# Logs
+*.log
+
+# IDEs
+.vscode/
+.idea/
